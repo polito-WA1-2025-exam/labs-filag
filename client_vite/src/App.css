@@ -1,3 +1,5 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
 .full-screen {
     height: 100vh; /* Full viewport height */
     width: 100vw; /* Full viewport width */
@@ -12,8 +14,8 @@
   }
 
   .navbar-custom {
-    background-color: transparent !important; /* Make the navbar completely transparent */
-    position: absolute; /* Posiziona la navbar sopra il carousel */
+    background-color: white;
+    position: fixed !important; /* Posiziona la navbar sopra il carousel */
     top: 0; /* Allinea in alto */
     left: 0; /* Allinea a sinistra */
     width: 100%; /* Larghezza completa */
@@ -23,10 +25,8 @@
 }
 
 .carousel-custom img {
-    height: 70vh; /* Adjust the height as needed */
+    height: 80vh; /* Adjust the height as needed */
     object-fit: cover; /* Ensure the image fits nicely */
-    position: relative; /* Ensure the carousel stays in its normal flow */
-    margin-top: 0; /* Remove any margin to align with the navbar */
     filter: brightness(60%); /* Riduci la luminosità al 50% */
 }
 
@@ -41,5 +41,19 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap; /* Allow wrapping to the next line */
+}
+
+.footer-custom{
+    margin: 2vh 10vh 2vh 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    color: rgba(0, 0, 0, 0.694);
+}
+
+.title-custom{
+    margin: 10vh 0vh 0vh 0vh;
+    text-align: center !important;
 }
 

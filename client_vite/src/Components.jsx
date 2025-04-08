@@ -10,26 +10,21 @@ import slide2 from './assets/images/Poke2.jpeg';
 import slide3 from './assets/images/Poke3.jpg';
 import './App.css';
 
-export function NavBar() {
+
+
+export function NavBar({lang, handleLang}) {
   return (
     <>
-      <Navbar className='navbar-custom' data-bs-theme="dark" >
+      <Navbar className='navbar-custom' >
         <Container>
           <Navbar.Brand href="#home">Poke House</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#features">Ingredients</Nav.Link>
+            <Nav.Link href="#ingredients">Ingredients</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
+          <Button variant="light" onClick={handleLang}><i class="bi bi-translate"> {lang} </i></Button>
         </Container>
       </Navbar>
-    </>
-  );
-}
-
-export function TypesExample() {
-  return (
-    <>
-      <Button variant="primary">Primary</Button>
     </>
   );
 }
@@ -76,5 +71,23 @@ export function MyCard({img, title, text}) {
         </Card.Text>
       </Card.Body>
     </Card>
+  );
+}
+
+export function Footer() {
+  return (
+    <footer className="footer-custom">
+      <span> FilaG Spa </span>
+      <span> © 2025 Poke House</span>
+    </footer>
+  );
+}
+
+export function Title() {
+  return (
+    <div className="title-custom">
+        <h1 >Choose your bowl size</h1>
+        <p >Select one of the following size and then select your personal ingredients from our proposal</p>
+    </div>
   );
 }
