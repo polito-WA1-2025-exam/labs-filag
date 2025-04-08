@@ -3,7 +3,6 @@ function Bowl (size, base, proteins, ingredients, extraIngredinets, price) {
   this.base = base;
   this.proteins = proteins;
   this.ingredients = ingredients;
-  this.extraIngredinets = extraIngredinets;
   this.price = price;
 
   this.addProtein = function (protein) {
