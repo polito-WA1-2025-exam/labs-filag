@@ -1,13 +1,20 @@
 GET http://localhost:3000/
-
 ###
 
-GET http://localhost:3000/user/Elisa/Bariselli/eb@studenti.polito.it/12-05-2002
-
+GET http://localhost:3000/user
 ###
 
-GET http://localhost:3000/user/Elisa
+POST http://localhost:3000/user
+Content-Type: application/json
 
+{ "name": "Jim", "id": 99 }
 ###
 
-GET http://localhost:3000/user/id/1
+GET http://localhost:3000/user/30/name
+###
+
+GET http://localhost:3000/show/proteins
+###
+
+GET http://localhost:3000/show/food/17
+###

@@ -1,40 +1,62 @@
 import express from 'express'
-import morgan from 'morgan';
-import fs from 'fs';
-import sqlite3 from 'sqlite3';
-import { get } from 'http';
-import UserDao from './user_Dao.mjs';
+import './poke.mjs'
+import { retreiveFoodByCat } from './dao.mjs';
+import { retreiveFoodById } from './dao.mjs';
 
+const app = express();
 
-const app = express() ;
-const userDao = new UserDao();
+//any route, before processing the route, checks if 
+//some json body needs to be processed
+app.use (express.json())
 
-app.use(express.json())
-app.use(morgan('dev'))
+//define routes:
+app.get ('/', (req, res) => res.send ('Hello world'))
 
-
-app.get('/', (req, res) =>	res.send('Hello World!')) ;
-
-app.get('/user/:n', async (req, res) => {
-    const n = req.params.n;
-    let list = await userDao.getUser(n);
-    if (list == null) {
-        res.status(404).send('User not found');
-        return;
-    }
-    res.json(list)
+/*PROVA:
+app.get ('/user', (req, res) => {
+    let u = {name: 'Ricc', id: 123}
+    res.json(u)
 })
 
-app.get('/user/id/:n', async (req, res) => {
-    const n = req.params.n;
-    let list = await userDao.getUserId(n);
-    if (list == null) {
-        res.status(404).send('User not found');
-        return;
-    }
-    res.json(list)
+app.post ('/user', (req,res) => {
+    console.log(req.body)
+    res.end()
 })
 
+app.get ('/user/:id/name', (req,res) => {
+    const id = req.params.id
+    res.json ( {"id": id, "name": "Tom"})
+})
+*/
 
+//retreives all food beloning to category "cat":
+app.get ('/show/:cat', async (req, res) => {
+    console.log(req.params.cat);
+    let list = null;
+    switch(req.params.cat) {
+        case 'ingredients':
+            list = await retreiveFoodByCat('Ingredient');
+            break;
+        case 'proteins':
+            list = await retreiveFoodByCat('Protein');
+            break;
+        case 'bases':
+            list = await retreiveFoodByCat('Base');
+            break;
+        default:
+            res.status(400).send('Invalid id');
+            return;
+    }
+    res.json(list);
+});
 
-app.listen(3000, () =>	console.log('Server	ready')) ;
+//retreives food by id:
+app.get ('/show/food/:id', async (req, res) => {
+    console.log(req.params.id);
+    let food = null;
+    food = await retreiveFoodById (req.params.id);
+    res.json (food);
+})
+
+//activate server:
+app.listen (3000, () => console.log('Server ready'))
