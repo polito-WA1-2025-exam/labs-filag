@@ -4,6 +4,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Carousel from 'react-bootstrap/Carousel';
 import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
+
+import { useState } from 'react'
 
 import './App.css';
 
@@ -19,7 +22,7 @@ export function NavBar({lang, handleLang, text}) {
             <Nav.Link href="#ingredients">{text.ingredients}</Nav.Link>
             <Nav.Link href="#pricing">{text.prices}</Nav.Link>
           </Nav>
-          <Button variant="light" onClick={handleLang}><i class="bi bi-translate"> {lang} </i></Button>
+          <Button variant="light" onClick={handleLang}><i className="bi bi-translate"> {lang} </i></Button>
         </Container>
       </Navbar>
     </>
@@ -75,5 +78,58 @@ export function Title({text}) {
         <h1 >{text.introQuestion}</h1>
         <p >{text.introDescription}</p>
     </div>
+  );
+}
+
+export function MyForm({text}) {
+  const [name, setName] = useState("");  
+
+  const handleSubmit = (event) => {  
+    console.log('Name submitted: ' +    name);  
+    event.preventDefault(); 
+  } 
+    
+  const handleChange = (event) => {  
+    setName(event.target.value) ; 
+  };
+
+  return(
+    <Form onSubmit={handleSubmit}>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control type="email" placeholder="Enter email" onChange={handleChange} />
+        <Form.Text className="text-muted">
+          We'll never share your email with anyone else.
+        </Form.Text>
+      </Form.Group>
+      {['checkbox', 'radio'].map((type) => (
+        <div key={`inline-${type}`} className="mb-3">
+          <Form.Check
+            inline
+            label="1"
+            name="group1"
+            type={type}
+            id={`inline-${type}-1`}
+          />
+          <Form.Check
+            inline
+            label="2"
+            name="group1"
+            type={type}
+            id={`inline-${type}-2`}
+          />
+          <Form.Check
+            inline
+            disabled
+            label="3 (disabled)"
+            type={type}
+            id={`inline-${type}-3`}
+          />
+        </div>
+      ))}
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
   );
 }

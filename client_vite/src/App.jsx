@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {NavBar, CarouselPoke, MyCard, Footer, Title} from './Components.jsx'
+import {NavBar, CarouselPoke, MyCard, MyForm, Footer, Title} from './Components.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 
@@ -121,6 +121,7 @@ function App() {
       <div className='card-container'>
         <MyCard text={translations[language].cards}></MyCard>
       </div>
+      <MyForm text={translations[language]}></MyForm>
       <Footer text={translations[language]}></Footer>
       </div>
     </>
