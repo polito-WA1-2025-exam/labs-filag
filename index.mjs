@@ -1,16 +1,20 @@
 import express from 'express'
 import morgan from 'morgan';
+import cors from 'cors';
 import fs from 'fs';
 import sqlite3 from 'sqlite3';
 import { get } from 'http';
 import UserDao from './user_Dao.mjs';
+import BowlDao from './bowl_Dao.mjs';
 
 
 const app = express() ;
 const userDao = new UserDao();
+const bowlDao = new BowlDao();
 
 app.use(express.json())
 app.use(morgan('dev'))
+app.use(cors());
 
 
 app.get('/', (req, res) =>	res.send('Hello World!')) ;
@@ -34,6 +38,11 @@ app.get('/user/id/:n', async (req, res) => {
     }
     res.json(list)
 })
+
+app.get('/api/options', async (req, res) => {
+    const options = await bowlDao.getOptionsBase();
+    res.json(options);
+});
 
 
 

@@ -6,7 +6,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import './App.css';
 
@@ -82,51 +82,93 @@ export function Title({text}) {
 }
 
 export function MyForm({text}) {
-  const [name, setName] = useState("");  
+  const [order, setOrder] = useState("");  
+  const [selectedBase, setSelectedBase] = useState(""); // Stato per la base selezionata
+  const [options, setOptions] = useState([]); // Stato per le opzioni
 
   const handleSubmit = (event) => {  
-    console.log('Name submitted: ' +    name);  
+    console.log('Order submitted');  
     event.preventDefault(); 
   } 
     
   const handleChange = (event) => {  
-    setName(event.target.value) ; 
+    setOrder(event.target.value) ; 
   };
+
+  const handleBaseChange = (event) => {
+    setSelectedBase(event.target.value); // Aggiorna lo stato con la base selezionata
+  };
+
+
+  useEffect(() => {
+    // Recupera i dati dal database
+    fetch('http://localhost:3000/api/options', {
+      headers: {
+      'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+      })
+      .then((data) => setOptions(data))
+      .catch((error) => console.error('Errore nel recupero dei dati:', error));
+  }, []);
+
+
 
   return(
     <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" onChange={handleChange} />
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
-      </Form.Group>
-      {['checkbox', 'radio'].map((type) => (
+
+      
+      {['radio'].map((type) => (
         <div key={`inline-${type}`} className="mb-3">
+          <h5>Choose your bowl size</h5>
           <Form.Check
             inline
-            label="1"
+            label="Regular"
             name="group1"
             type={type}
             id={`inline-${type}-1`}
           />
           <Form.Check
             inline
-            label="2"
+            label="Medium"
             name="group1"
             type={type}
             id={`inline-${type}-2`}
           />
           <Form.Check
             inline
-            disabled
-            label="3 (disabled)"
+            label="Large"
+            name="group1"
             type={type}
             id={`inline-${type}-3`}
           />
         </div>
       ))}
+
+
+<label>Scegli una base</label>
+      <select
+        id="bowlBase"
+        name="bowlBase"
+        value={selectedBase}
+        onChange={handleBaseChange}
+      >
+        <option value="" disabled>
+          Seleziona una base
+        </option>
+        {options.map((option) => (
+          <option key={option.IngredientId} value={option.name}>
+            {option.name}
+          </option>
+        ))}
+      </select>
+      <br></br>
+
       <Button variant="primary" type="submit">
         Submit
       </Button>

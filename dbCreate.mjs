@@ -13,7 +13,9 @@ queries.forEach(query => db.run(query));
 
 const ingredients = [
     "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Rice', 'Base')",
-    "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Beans', 'Base')",    
+    "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Rice Venere', 'Base')",    
+    "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Cous Cous', 'Base')",   
+    "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Salad', 'Base')",     
     "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Chicken', 'Protein')",
     "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Beef', 'Protein')",
     "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Pork', 'Protein')",

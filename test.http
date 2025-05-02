@@ -11,3 +11,6 @@ GET http://localhost:3000/user/Elisa
 ###
 
 GET http://localhost:3000/user/id/1
+
+###
+GET http://localhost:3000/api/options
