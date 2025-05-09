@@ -29,6 +29,19 @@ const ingredients = [
     "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Onion', 'Ingredient')",
     "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Broccoli', 'Ingredient')",
     "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Spinach', 'Ingredient')",
+    "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Tofu', 'Protein')",
+    "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Egg', 'Protein')",
+    "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Cheese', 'Protein')",
+    "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Peas', 'Ingredient')",
+    "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Corn', 'Ingredient')",
+    "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Bell Pepper', 'Ingredient')",
+    "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Zucchini', 'Ingredient')",
+    "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Mushrooms', 'Ingredient')",
+    "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Olives', 'Ingredient')",
+    "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Basil', 'Ingredient')",
+    "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Parsley', 'Ingredient')",
+    "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Chickpeas', 'Ingredient')",
+    "INSERT INTO INGREDIENTS (name, TypeIngr) VALUES ('Lentils', 'Ingredient')",
 ];
 
 const users = [

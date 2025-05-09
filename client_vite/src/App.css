@@ -44,7 +44,7 @@
 }
 
 .footer-custom{
-    margin: 2vh 10vh 2vh 10vh;
+    margin: 2vh 10vw 2vh 10vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,5 +55,22 @@
 .title-custom{
     margin: 10vh 0vh 0vh 0vh;
     text-align: center !important;
+}
+
+.form-card{
+    width: 83vw;
+    margin: 5vh 8vw 5vh 8vw; /* Top, Right, Bottom, Left */
+    padding: 0vh 2vw 2vh 2vw; /* Top, Right, Bottom, Left */
+}
+
+
+
+.inline-custom {
+    display: inline-flex;
+    margin-right: 3vw;
+}
+
+.form-items{
+    margin-top: 3vh;
 }
 

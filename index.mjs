@@ -44,6 +44,16 @@ app.get('/api/options', async (req, res) => {
     res.json(options);
 });
 
+app.get('/api/ingredients', async (req, res) => {
+    const ingredients = await bowlDao.getIngredients(); 
+    res.json(ingredients);
+});
+
+app.get('/api/proteins', async (req, res) => {
+    const proteins = await bowlDao.getProteins(); 
+    res.json(proteins);
+});
+
 
 
 app.listen(3000, () =>	console.log('Server	ready')) ;

@@ -11,5 +11,23 @@ export default function BowlDao() {
         });
     };
     
+    this.getIngredients = async function() {
+        return new Promise((resolve, reject) => {
+            db.all("SELECT * FROM INGREDIENTS WHERE TypeIngr='Ingredient'",  (err, rows) => {
+                if (err) reject(err);
+                resolve(rows);
+            });
+        });
+    };
+
+    this.getProteins = async function() {
+        return new Promise((resolve, reject) => {
+            db.all("SELECT * FROM INGREDIENTS WHERE TypeIngr='Protein'",  (err, rows) => {
+                if (err) reject(err);
+                resolve(rows);
+            });
+        });
+    };
+
 
 } 

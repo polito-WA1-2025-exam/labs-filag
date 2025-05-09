@@ -85,6 +85,10 @@ export function MyForm({text}) {
   const [order, setOrder] = useState("");  
   const [selectedBase, setSelectedBase] = useState(""); // Stato per la base selezionata
   const [options, setOptions] = useState([]); // Stato per le opzioni
+  const [ingredients, setIngredients] = useState([]); // Stato per gli ingredienti
+  const [proteins, setProteins] = useState([]); // Stato per gli ingredienti
+  const [selectedIngredients, setSelectedIngredients] = useState([]); // Stato per gli ingredienti selezionati
+  const [selectedProteins, setSelectedProteins] = useState([]); // Stato per le proteine selezionate
 
   const handleSubmit = (event) => {  
     console.log('Order submitted');  
@@ -99,9 +103,28 @@ export function MyForm({text}) {
     setSelectedBase(event.target.value); // Aggiorna lo stato con la base selezionata
   };
 
+  const handleIngredientChange = (event) => {
+    const value = event.target.value;
+    if (event.target.checked) {
+      setSelectedIngredients((prev) => [...prev, value]); // Aggiungi l'ingrediente selezionato
+    } else {
+      setSelectedIngredients((prev) => prev.filter((item) => item !== value)); // Rimuovi l'ingrediente deselezionato
+    }
+  };
+
+  const handleProteinChange = (event) => {
+    const value = event.target.value;
+    if (event.target.checked) {
+      setSelectedProteins((prev) => [...prev, value]); // Aggiungi l'ingrediente selezionato
+    } else {
+      setSelectedProteins((prev) => prev.filter((item) => item !== value)); // Rimuovi l'ingrediente deselezionato
+    }
+  };
+
 
   useEffect(() => {
-    // Recupera i dati dal database
+
+    // Recupera opzioni base
     fetch('http://localhost:3000/api/options', {
       headers: {
       'Content-Type': 'application/json',
@@ -115,63 +138,133 @@ export function MyForm({text}) {
       })
       .then((data) => setOptions(data))
       .catch((error) => console.error('Errore nel recupero dei dati:', error));
+
+
+    // Recupera gli ingredienti
+    fetch('http://localhost:3000/api/ingredients', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setIngredients(data))
+      .catch((error) => console.error('Errore nel recupero degli ingredienti:', error));
+
+
+      // Recupera le proteine
+    fetch('http://localhost:3000/api/proteins', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setProteins(data))
+      .catch((error) => console.error('Errore nel recupero delle proteine:', error));
   }, []);
 
 
 
   return(
-    <Form onSubmit={handleSubmit}>
+    <Card className='form-card'>
+      <Card.Body>
 
-      
-      {['radio'].map((type) => (
-        <div key={`inline-${type}`} className="mb-3">
+        <Form onSubmit={handleSubmit}>
+        <div className='form-items'>
           <h5>Choose your bowl size</h5>
-          <Form.Check
-            inline
-            label="Regular"
-            name="group1"
-            type={type}
-            id={`inline-${type}-1`}
-          />
-          <Form.Check
-            inline
-            label="Medium"
-            name="group1"
-            type={type}
-            id={`inline-${type}-2`}
-          />
-          <Form.Check
-            inline
-            label="Large"
-            name="group1"
-            type={type}
-            id={`inline-${type}-3`}
-          />
+          {['radio'].map((type) => (
+            <div key={`inline-${type}`} className="mb-3">
+              <Form.Check
+                inline
+                label="Regular"
+                name="group1"
+                type={type}
+                id={`inline-${type}-1`}
+              />
+              <Form.Check
+                inline
+                label="Medium"
+                name="group1"
+                type={type}
+                id={`inline-${type}-2`}
+              />
+              <Form.Check
+                inline
+                label="Large"
+                name="group1"
+                type={type}
+                id={`inline-${type}-3`}
+              />
+            </div>
+          ))}
+
         </div>
-      ))}
 
 
-<label>Scegli una base</label>
-      <select
-        id="bowlBase"
-        name="bowlBase"
-        value={selectedBase}
-        onChange={handleBaseChange}
-      >
-        <option value="" disabled>
-          Seleziona una base
-        </option>
-        {options.map((option) => (
-          <option key={option.IngredientId} value={option.name}>
-            {option.name}
-          </option>
-        ))}
-      </select>
-      <br></br>
+        <div className='form-items'>
+          <h5>Choose a base</h5>
+          <select
+            id="bowlBase"
+            name="bowlBase"
+            value={selectedBase}
+            onChange={handleBaseChange}
+          >
+            <option value="" disabled>
+              Seleziona una base
+            </option>
+            {options.map((option) => (
+              <option key={option.IngredientId} value={option.name}>
+                {option.name}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
+        <div className='form-items'>
+          <h5>Choose your proteins</h5>
+          <div className="mb-3">
+            {proteins.map((protein) => (
+              <div key={protein.IngredientId} className="inline-custom">
+                <Form.Check
+                  type="checkbox"
+                  label={protein.name}
+                  value={protein.name}
+                  onChange={handleProteinChange}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className='form-items'>
+          <h5>Choose your ingredients</h5>
+          <div className="mb-3">
+            {ingredients.map((ingredient) => (
+              <div key={ingredient.IngredientId} className="inline-custom">
+                <Form.Check
+                  type="checkbox"
+                  label={ingredient.name}
+                  value={ingredient.name}
+                  onChange={handleIngredientChange}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+
+        <br></br>
+        
+
+        <Button variant="success" type="submit">
+          Submit
+        </Button>
+
+
+      </Form>
+
+
+      </Card.Body>
+    </Card>
+    
   );
 }
