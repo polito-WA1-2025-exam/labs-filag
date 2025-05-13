@@ -94,6 +94,8 @@ export function MyForm({text}) {
   const [selectedProteins, setSelectedProteins] = useState([]); // Stato per le proteine selezionate
   const [price, setPrice] = useState(0); // Stato per il prezzo
 
+  const [isSuccess, setSuccess] = useState(""); 
+
   const handleSubmit = (event) => {  
 
     event.preventDefault();
@@ -118,10 +120,10 @@ export function MyForm({text}) {
         return response.json();
       })
       .then((data) => {
-        console.log('Order submitted successfully:', data);
+        setSuccess("ok"); 
       })
       .catch((error) => {
-        console.error('Error submitting order:', error);
+        setSuccess("error");
       });
 
   } 
@@ -204,23 +206,6 @@ export function MyForm({text}) {
 
   useEffect(() => {
 
-    if (selectedBase === "Regular") {
-      setPrice(9); 
-    }
-    else if (selectedBase === "Medium") {
-      setPrice(11); 
-    }
-    else if (selectedBase === "Large") {
-      setPrice(14); 
-    }
-    if (selectedBase === "") {
-      setPrice(0); 
-    }    
-
-  }, [selectedBase]); // Aggiorna il prezzo quando cambia la base selezionata
-
-  useEffect(() => {
-
     console.log("Selected Proteins: ", selectedProteins);
     console.log("Selected Ingredients: ", selectedIngredients);
     var tot = 0;
@@ -275,7 +260,7 @@ export function MyForm({text}) {
 
       setPrice(tot); 
 
-  }, [selectedProteins, selectedIngredients]);
+  }, [option, selectedProteins, selectedIngredients]);
 
 
   return(
@@ -372,14 +357,36 @@ export function MyForm({text}) {
         </div>
 
         <div className='form-items'>
-          <h1>Price</h1>
-          <h5>${price}</h5>
+          <h1>Price</h1><h5>${price}</h5>
         </div>
 
+        <br />
+
+
+        <div className='inline-custom'>
         <Button variant="success" type="submit">
           Submit
         </Button>
 
+        { isSuccess === "ok" && (
+          <Card bg={'success'} key={'success'} text='light' className='text-card'>
+            <Card.Body>
+              <Card.Text>
+                Bowl created successfully, thank you for your order!
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        )} 
+        { isSuccess === "error" && (
+          <Card bg={'danger'} key={'error'} text='light' className='text-card' >
+            <Card.Body>
+              <Card.Text>
+                Error creating bowl, please try again.
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        )} 
+        </div>
 
       </Form>
 

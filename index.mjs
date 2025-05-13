@@ -55,9 +55,25 @@ app.get('/api/proteins', async (req, res) => {
 });
 
 app.post('/api/submit', async (req, res) => {
-    const { option, selectedBase: base, selectedIngredients: ingr, selectedProteins: prot, price } = req.body;
-    const bowlId = await bowlDao.addBowl(option, price);
-    await bowlDao.addIngredients(bowlId, base, ingr, prot);
+    try{
+        const { option, selectedBase: base, selectedIngredients: ingr, selectedProteins: prot, price } = req.body;
+        const bowlId = await bowlDao.addBowl(option, price);
+        await bowlDao.addIngredients(bowlId, base, ingr, prot);
+
+        res.status(200).json({
+            status: "ok",
+            message: "Bowl created successfully",
+            data: { bowlId }
+        });
+    } catch (error) {
+        console.error('Error creating bowl:', error);
+
+        // Risposta di errore
+        res.status(500).json({
+        status: "error",
+        message: "Failed to create bowl"
+        });
+  }  
 });
 
 

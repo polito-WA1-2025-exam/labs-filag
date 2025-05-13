@@ -64,7 +64,6 @@
 }
 
 
-
 .inline-custom {
     display: inline-flex;
     margin-right: 3vw;
@@ -72,5 +71,10 @@
 
 .form-items{
     margin-top: 3vh;
+}
+
+.text-card{
+    margin-left: 3vw;
+    
 }
 
