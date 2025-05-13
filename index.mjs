@@ -54,6 +54,12 @@ app.get('/api/proteins', async (req, res) => {
     res.json(proteins);
 });
 
+app.post('/api/submit', async (req, res) => {
+    const { option, selectedBase: base, selectedIngredients: ingr, selectedProteins: prot, price } = req.body;
+    const bowlId = await bowlDao.addBowl(option, price);
+    await bowlDao.addIngredients(bowlId, base, ingr, prot);
+});
+
 
 
 app.listen(3000, () =>	console.log('Server	ready')) ;

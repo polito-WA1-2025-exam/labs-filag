@@ -95,8 +95,35 @@ export function MyForm({text}) {
   const [price, setPrice] = useState(0); // Stato per il prezzo
 
   const handleSubmit = (event) => {  
-    console.log('Order submitted');  
-    event.preventDefault(); 
+
+    event.preventDefault();
+
+    fetch('http://localhost:3000/api/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        option,
+        selectedBase,
+        selectedIngredients,
+        selectedProteins,
+        price
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Order submitted successfully:', data);
+      })
+      .catch((error) => {
+        console.error('Error submitting order:', error);
+      });
+
   } 
     
   const handleChange = (event) => {  
@@ -194,6 +221,8 @@ export function MyForm({text}) {
 
   useEffect(() => {
 
+    console.log("Selected Proteins: ", selectedProteins);
+    console.log("Selected Ingredients: ", selectedIngredients);
     var tot = 0;
 
     if (option === "Regular"  && (selectedProteins.length > 1 && selectedIngredients.length > 3)) {
@@ -303,7 +332,7 @@ export function MyForm({text}) {
               Seleziona una base
             </option>
             {bases.map((selectedBase) => (
-              <option key={selectedBase.IngredientId} value={selectedBase.name}>
+              <option key={selectedBase.IngredientId} value={selectedBase.IngredientId}>
                 {selectedBase.name}
               </option>
             ))}
@@ -318,7 +347,7 @@ export function MyForm({text}) {
                 <Form.Check
                   type="checkbox"
                   label={protein.name}
-                  value={protein.name}
+                  value={protein.IngredientId}
                   onChange={handleProteinChange}
                 />
               </div>
@@ -334,7 +363,7 @@ export function MyForm({text}) {
                 <Form.Check
                   type="checkbox"
                   label={ingredient.name}
-                  value={ingredient.name}
+                  value={ingredient.IngredientId}
                   onChange={handleIngredientChange}
                 />
               </div>
