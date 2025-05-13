@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import {NavBar, CarouselPoke, MyCard, MyForm, Footer, Title} from './Components.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Routes, Route} from 'react-router-dom';
+import IngredientsPage from './IngredientsPage.jsx';
 import './App.css'
 
 import slide1 from './assets/images/Poke1.jpg';
@@ -116,6 +118,10 @@ function App() {
     <>
       <div>
       <NavBar lang = {language} handleLang={handleLang} text={translations[language]}></NavBar>
+      <Routes>
+        <Route path="/"  />
+        <Route path="/ingredients" element={<IngredientsPage />} />
+      </Routes>
       <CarouselPoke text={translations[language].carousel}></CarouselPoke>
       <Title text={translations[language]}></Title>
       <div className='card-container'>

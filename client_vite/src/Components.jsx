@@ -6,6 +6,8 @@ import Carousel from 'react-bootstrap/Carousel';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 
+import { Link } from 'react-router-dom';
+
 import { useState, useEffect, use } from 'react'
 
 import './App.css';
@@ -17,9 +19,9 @@ export function NavBar({lang, handleLang, text}) {
     <>
       <Navbar className='navbar-custom' >
         <Container>
-          <Navbar.Brand href="#home">{text.title}</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">{text.title}</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#ingredients">{text.ingredients}</Nav.Link>
+            <Nav.Link as={Link} to="/ingredients">{text.ingredients}</Nav.Link>
             <Nav.Link href="#pricing">{text.prices}</Nav.Link>
           </Nav>
           <Button variant="light" onClick={handleLang}><i className="bi bi-translate"> {lang} </i></Button>

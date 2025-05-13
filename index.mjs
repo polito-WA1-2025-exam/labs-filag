@@ -17,7 +17,7 @@ app.use(morgan('dev'))
 app.use(cors());
 
 
-app.get('/', (req, res) =>	res.send('Hello World!')) ;
+app.get('/', (req, res) =>	res) ;
 
 app.get('/user/:n', async (req, res) => {
     const n = req.params.n;
