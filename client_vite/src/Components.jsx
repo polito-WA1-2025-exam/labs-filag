@@ -6,7 +6,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 
 import './App.css';
 
@@ -83,12 +83,16 @@ export function Title({text}) {
 
 export function MyForm({text}) {
   const [order, setOrder] = useState("");  
-  const [selectedBase, setSelectedBase] = useState(""); // Stato per la base selezionata
-  const [options, setOptions] = useState([]); // Stato per le opzioni
+
+  const [bases, setBases] = useState([]); // Stato per le basi
   const [ingredients, setIngredients] = useState([]); // Stato per gli ingredienti
   const [proteins, setProteins] = useState([]); // Stato per gli ingredienti
+
+  const [option, setOptions] = useState(""); // Stato per le opzioni grandezza bowl
+  const [selectedBase, setSelectedBase] = useState(""); // Stato per la base selezionata
   const [selectedIngredients, setSelectedIngredients] = useState([]); // Stato per gli ingredienti selezionati
   const [selectedProteins, setSelectedProteins] = useState([]); // Stato per le proteine selezionate
+  const [price, setPrice] = useState(0); // Stato per il prezzo
 
   const handleSubmit = (event) => {  
     console.log('Order submitted');  
@@ -99,14 +103,21 @@ export function MyForm({text}) {
     setOrder(event.target.value) ; 
   };
 
+  const handleOptionsChange = (event) => {
+    const value = event.target.value;
+    setOptions(value); 
+  }
+
   const handleBaseChange = (event) => {
-    setSelectedBase(event.target.value); // Aggiorna lo stato con la base selezionata
+    const value = event.target.value;
+    setSelectedBase(value); // Aggiorna lo stato con la base selezionata
   };
 
   const handleIngredientChange = (event) => {
     const value = event.target.value;
     if (event.target.checked) {
       setSelectedIngredients((prev) => [...prev, value]); // Aggiungi l'ingrediente selezionato
+    
     } else {
       setSelectedIngredients((prev) => prev.filter((item) => item !== value)); // Rimuovi l'ingrediente deselezionato
     }
@@ -116,6 +127,7 @@ export function MyForm({text}) {
     const value = event.target.value;
     if (event.target.checked) {
       setSelectedProteins((prev) => [...prev, value]); // Aggiungi l'ingrediente selezionato
+      
     } else {
       setSelectedProteins((prev) => prev.filter((item) => item !== value)); // Rimuovi l'ingrediente deselezionato
     }
@@ -136,7 +148,7 @@ export function MyForm({text}) {
       }
       return response.json();
       })
-      .then((data) => setOptions(data))
+      .then((data) => setBases(data))
       .catch((error) => console.error('Errore nel recupero dei dati:', error));
 
 
@@ -160,8 +172,81 @@ export function MyForm({text}) {
       .then((response) => response.json())
       .then((data) => setProteins(data))
       .catch((error) => console.error('Errore nel recupero delle proteine:', error));
-  }, []);
+  }, []); // Effettua la chiamata API al caricamento del componente, all'inizio
 
+
+  useEffect(() => {
+
+    if (selectedBase === "Regular") {
+      setPrice(9); 
+    }
+    else if (selectedBase === "Medium") {
+      setPrice(11); 
+    }
+    else if (selectedBase === "Large") {
+      setPrice(14); 
+    }
+    if (selectedBase === "") {
+      setPrice(0); 
+    }    
+
+  }, [selectedBase]); // Aggiorna il prezzo quando cambia la base selezionata
+
+  useEffect(() => {
+
+    var tot = 0;
+
+    if (option === "Regular"  && (selectedProteins.length > 1 && selectedIngredients.length > 3)) {
+        const extra = selectedProteins.length - 1 + selectedIngredients.length - 3;
+        const extraCost = (9 * 0.2) * extra; 
+        tot = 9 + extraCost;
+      } else if (option === "Regular" && (selectedProteins.length <= 1 && selectedIngredients.length <= 3)) {
+        tot = 9;
+      } else if (option === "Regular"  && (selectedProteins.length <= 1)) {
+        const extra = selectedIngredients.length - 3;
+        const extraCost = (9 * 0.2) * extra; 
+        tot = 9 + extraCost;
+      } else if (option === "Regular" && (selectedIngredients.length <= 3)) {
+        const extra = selectedProteins.length - 1;
+        const extraCost = (9 * 0.2) * extra; 
+        tot = 9 + extraCost;
+      }
+
+      else if (option === "Medium" && (selectedProteins.length > 1 && selectedIngredients.length > 3)) {
+        const extra = selectedProteins.length - 1 + selectedIngredients.length - 3;
+        const extraCost = (11 * 0.2) * extra; 
+        tot = 11 + extraCost;
+      } else if (option === "Medium" && (selectedProteins.length <= 1 && selectedIngredients.length <= 3)) {
+        tot = 11;
+      } else if (option === "Medium" && (selectedProteins.length <= 1)) {
+        const extra = selectedIngredients.length - 3;
+        const extraCost = (11 * 0.2) * extra; 
+        tot = 11 + extraCost;
+      } else if (option === "Medium" && (selectedIngredients.length <= 3)) {
+        const extra = selectedProteins.length - 1;
+        const extraCost = (11 * 0.2) * extra; 
+        tot = 11 + extraCost;
+      }
+      
+      else if (option === "Large" && (selectedProteins.length > 2 && selectedIngredients.length > 4)) {
+        const extra = selectedProteins.length - 2 + selectedIngredients.length - 4;
+        const extraCost = (14 * 0.2) * extra; 
+        tot = 14 + extraCost;
+      } else if (option === "Large" && (selectedProteins.length <= 2 && selectedIngredients.length <= 4)) {
+        tot = 14;
+      } else if (option === "Large" && (selectedProteins.length <= 2)) {
+        const extra = selectedIngredients.length - 4;
+        const extraCost = (14 * 0.2) * extra; 
+        tot = 14 + extraCost;
+      } else if (option === "Large" && (selectedIngredients.length <= 4)) {
+        const extra = selectedProteins.length - 2;
+        const extraCost = (14 * 0.2) * extra; 
+        tot = 14 + extraCost;
+      }
+
+      setPrice(tot); 
+
+  }, [selectedProteins, selectedIngredients]);
 
 
   return(
@@ -177,22 +262,28 @@ export function MyForm({text}) {
                 inline
                 label="Regular"
                 name="group1"
+                value="Regular"
                 type={type}
                 id={`inline-${type}-1`}
+                onChange={handleOptionsChange}
               />
               <Form.Check
                 inline
                 label="Medium"
                 name="group1"
+                value="Medium"
                 type={type}
                 id={`inline-${type}-2`}
+                onChange={handleOptionsChange}
               />
               <Form.Check
                 inline
                 label="Large"
                 name="group1"
+                value="Large"
                 type={type}
                 id={`inline-${type}-3`}
+                onChange={handleOptionsChange}
               />
             </div>
           ))}
@@ -211,9 +302,9 @@ export function MyForm({text}) {
             <option value="" disabled>
               Seleziona una base
             </option>
-            {options.map((option) => (
-              <option key={option.IngredientId} value={option.name}>
-                {option.name}
+            {bases.map((selectedBase) => (
+              <option key={selectedBase.IngredientId} value={selectedBase.name}>
+                {selectedBase.name}
               </option>
             ))}
           </select>
@@ -251,9 +342,10 @@ export function MyForm({text}) {
           </div>
         </div>
 
-
-        <br></br>
-        
+        <div className='form-items'>
+          <h1>Price</h1>
+          <h5>${price}</h5>
+        </div>
 
         <Button variant="success" type="submit">
           Submit
