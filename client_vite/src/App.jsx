@@ -1,9 +1,11 @@
 import { useState } from 'react'
-import {NavBar, CarouselPoke, MyCard, MyForm, Footer, Title} from './Components.jsx'
+import { NavBar, CarouselPoke, MyCard, MyForm, Footer, Title } from './Components.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Routes, Route} from 'react-router-dom';
 import IngredientsPage from './IngredientsPage.jsx';
+import { Routes, Route } from 'react-router';
 import './App.css'
+import Root from './Root.jsx';
+import FirstPage from './FirstPage.jsx';
 
 import slide1 from './assets/images/Poke1.jpg';
 import slide2 from './assets/images/Poke2.jpeg';
@@ -21,7 +23,7 @@ function App() {
     }
   }
 
-  // Function to handle language change
+    // Function to handle language change
   const translations = {
     IT: {
       title: "Casa del Poke",
@@ -108,27 +110,21 @@ function App() {
           img: slide3,
         },
       ],
-      
+
     },
   };
-
 
 
   return (
     <>
       <div>
-      <NavBar lang = {language} handleLang={handleLang} text={translations[language]}></NavBar>
-      <Routes>
-        <Route path="/"  />
-        <Route path="/ingredients" element={<IngredientsPage />} />
-      </Routes>
-      <CarouselPoke text={translations[language].carousel}></CarouselPoke>
-      <Title text={translations[language]}></Title>
-      <div className='card-container'>
-        <MyCard text={translations[language].cards}></MyCard>
-      </div>
-      <MyForm text={translations[language]}></MyForm>
-      <Footer text={translations[language]}></Footer>
+        <Routes>
+          <Route path="/" element={<Root language={language} handleLang={handleLang} text={translations[language]}/> } >
+            <Route index element={<FirstPage textCarousel = {translations[language].carousel} text = {translations[language]} textCard = {translations[language].cards}/>} />
+            <Route path='/ingredients' element={<IngredientsPage />} />
+          </Route>
+        </Routes>
+
       </div>
     </>
   )
