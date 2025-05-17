@@ -1,0 +1,23 @@
+[
+        {
+            "Name": "R",
+            "NumOfIngredients": 4,
+            "NumOfProtein": 1,
+            "Price": 9,
+            "NumDaily": 10
+        },
+        {
+            "Name": "M",
+            "NumOfIngredients": 4,
+            "NumOfProtein": 2,
+            "Price": 11,
+            "NumDaily": 8
+        },
+        {
+            "Name": "L",
+            "NumOfIngredients": 6,
+            "NumOfProtein": 3,
+            "Price": 14,
+            "NumDaily": 6
+        }
+    ]

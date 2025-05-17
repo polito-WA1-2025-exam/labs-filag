@@ -1,0 +1,93 @@
+/* Custom.css */
+
+/* Custom Navbar Styling */
+.custom_navbar {
+    background-color: #343a40; /* Dark background color */
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    padding: 10px 20px;
+}
+
+/* Navbar Brand Styling */
+.navbar-brand {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+/* Navbar Links Styling */
+.navbar .nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    font-size: 16px;
+}
+
+.navbar .nav-link:hover {
+    color: #61dafb; /* React blue color for hover effect */
+    text-decoration: underline;
+}
+
+/* Ensure Navbar is Fixed and Content is Spaced */
+.content {
+    margin-top: 70px; /* Adjust this value based on the height of the navbar */
+}
+
+
+/* Carousel Styling */
+.carousel {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    min-width: 100%;
+    height: 400px; /* Adjust height as needed */
+    background-size: cover;
+    background-position: center;
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.carousel-control {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 18px;
+}
+
+.carousel-control:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-item img {
+    width: 100%; /* Ensure the image spans the full width */
+    height: 400px; /* Set a fixed height for the carousel */
+    object-fit: scale-down; /* Ensure the image scales properly without distortion */
+  }
+
+.container_dropdown {
+    position: relative;
+    display: inline-block;
+}

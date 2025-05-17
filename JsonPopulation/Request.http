@@ -1,0 +1,31 @@
+//Get Request
+GET http://localhost:3000/show/Proteins
+###
+GET http://localhost:3000/show/Ingredients
+###
+GET http://localhost:3000/show/Bases
+###
+GET http://localhost:3000/show/Bowls
+###
+//post request
+Post http://localhost:3000/NewUser HTTP/1.1
+Content-Type: application/json
+{
+  "Name": "NewUser",
+  "Email": "a.b@gmail.com",
+  "Password": "1234"
+}
+
+###
+
+POST http://localhost:3000/NewTopping HTTP/1.1
+Content-Type: application/json
+
+{
+  "Name": "PolloAlCurry",
+  "TypeIngr": "Protein"
+}
+
+###
+
+

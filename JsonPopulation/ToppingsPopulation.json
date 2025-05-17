@@ -1,0 +1,20 @@
+
+[
+    { "Name": "rice", "TypeIngr": "Base" },
+    { "Name": "black rice", "TypeIngr": "Base" },
+    { "Name": "salad", "TypeIngr": "Base" },
+    { "Name": "tuna", "TypeIngr": "Protein" },
+    { "Name": "chicken", "TypeIngr": "Protein" },
+    { "Name": "salmon", "TypeIngr": "Protein" },
+    { "Name": "tofu", "TypeIngr": "Protein" },
+    { "Name": "avocado", "TypeIngr": "Ingredient" },
+    { "Name": "ananas", "TypeIngr": "Ingredient" },
+    { "Name": "cashew nuts", "TypeIngr": "Ingredient" },
+    { "Name": "kale", "TypeIngr": "Ingredient" },
+    { "Name": "mango", "TypeIngr": "Ingredient" },
+    { "Name": "peppers", "TypeIngr": "Ingredient" },
+    { "Name": "corn", "TypeIngr": "Ingredient" },
+    { "Name": "wakame", "TypeIngr": "Ingredient" },
+    { "Name": "tomatoes", "TypeIngr": "Ingredient" },
+    { "Name": "carrots", "TypeIngr": "Ingredient" },
+    { "Name": "salad", "TypeIngr": "Ingredient" }]
