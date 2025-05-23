@@ -1,10 +1,14 @@
 import React from 'react';
+import { MyCard, Title } from './Components.jsx';
 
 export default function IngredientsPage() {
   return (
     <div>
-      <h1>Ingredients</h1>
-      <p>Here you can manage your ingredients.</p>
+      <Title text = {{
+        introQuestion: "Qui puoi trovare la lista di ingredienti disponibili",
+        introDescription: ""
+      }}>
+      </Title>
     </div>
   );
 }

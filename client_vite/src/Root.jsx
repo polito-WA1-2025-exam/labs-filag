@@ -5,7 +5,7 @@ function Root(props) {
 
   return (
     <>
-      <NavBar language={props.language} handleLang={props.handleLang} text={props.text}></NavBar>
+      <NavBar lang={props.language} handleLang={props.handleLang} text={props.text}></NavBar>
       <Outlet />
       <Footer text={props.text}></Footer>
     </>

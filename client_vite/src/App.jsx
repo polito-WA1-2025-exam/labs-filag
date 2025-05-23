@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { NavBar, CarouselPoke, MyCard, MyForm, Footer, Title } from './Components.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import IngredientsPage from './IngredientsPage.jsx';
+import IngredientsPage from './ingredientsPage.jsx';
 import { Routes, Route } from 'react-router';
 import './App.css'
 import Root from './Root.jsx';

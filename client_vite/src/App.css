@@ -1,5 +1,10 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
+
+body, #root{
+    padding-top: 3vh;
+}
+
 .full-screen {
     height: 100vh; /* Full viewport height */
     width: 100vw; /* Full viewport width */
@@ -31,9 +36,14 @@
 }
 
 .card-custom{
-    height: 10vh;
+    min-height: 250px; 
     width: 25vw;
-    margin: 5vh 2vw 5vh 2vw; /* Top, Right, Bottom, Left */
+    margin: 5vh 2vw 5vh 2vw;
+    clear: both;
+    border: 1px solid #dee2e6; 
+    border-radius: 0.5rem;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .card-container{
@@ -59,7 +69,7 @@
 
 .form-card{
     width: 83vw;
-    margin: 5vh 8vw 5vh 8vw; /* Top, Right, Bottom, Left */
+    margin: 5vh auto 5vh auto; /* Top, Right, Bottom, Left */
     padding: 0vh 2vw 2vh 2vw; /* Top, Right, Bottom, Left */
 }
 
@@ -77,4 +87,5 @@
     margin-left: 3vw;
     
 }
+
 
